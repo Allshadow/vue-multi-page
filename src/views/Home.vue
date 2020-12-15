@@ -6,7 +6,7 @@
         :text="item.text"
         v-for="(item, index) in list"
         :key="index"
-        @click="toRoute(item.route)"
+        @click="toRoute(item.route, item.url)"
       />
     </van-grid>
   </div>
@@ -21,25 +21,27 @@ export default {
                 {
                     icon: 'photo-o',
                     text: "师者",
-                    route: '/teacherlive.html'
+                    route: '/teacherlive.html',
+                    url: ''
                 },
                 {
                     icon: 'photo-o',
                     text: '测试',
-                    route: '/test.html'
+                    route: '/test.html',
+                    url: ''
                 }
             ]
         }
     },
     methods:{
-        toRoute(route){
+        toRoute(route, url){
             let httpRoute;
             if (location.hostname === 'localhost' ) { 
                 httpRoute = '' 
             } else { 
                 const http = window.location.protocol + '//' + location.hostname + ':' + location.port 
-                //此处为http域名
-                httpRoute = http + '/netopenws/wt/vue/dist' 
+                //此处为url http 域名
+                httpRoute = http + url + '/dist' 
             }
             window.location.href = httpRoute + route;
         } 
